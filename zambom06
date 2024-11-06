@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class Concurso {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite a quantidade de participantes: ");
+        int N = scanner.nextInt();
+
+        String[] nomes = new String[N];
+        double[] nota1 = new double[N];
+        double[] nota2 = new double[N];
+        double[] medias = new double[N];
+
+        for (int i = 0; i < N; i++) {
+            System.out.println("Participante " + (i + 1));
+            System.out.print("Nome: ");
+            nomes[i] = scanner.next();
+            System.out.print("Nota da etapa 1: ");
+            nota1[i] = scanner.nextDouble();
+            System.out.print("Nota da etapa 2: ");
+            nota2[i] = scanner.nextDouble();
+
+            medias[i] = (nota1[i] + nota2[i]) / 2;
+        }
+
+        System.out.println("\nTabela de participantes:");
+        System.out.println("Nome\t\tNota 1\tNota 2\tMédia");
+        for (int i = 0; i < N; i++) {
+            System.out.printf("%s\t%.2f\t%.2f\t%.2f\n", nomes[i], nota1[i], nota2[i], medias[i]);
+        }
+
+        int aprovados = 0;
+        double maiorMedia = 0;
+        int indiceMaiorMedia = 0;
+        double somaAprovados = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (medias[i] >= 70) {
+                aprovados++;
+                somaAprovados += medias[i];
+                if (medias[i] > maiorMedia) {
+                    maiorMedia = medias[i];
+                    indiceMaiorMedia = i;
+                }
+            }
+        }
+
+        System.out.println("\nAprovados:");
+        for (int i = 0; i < N; i++) {
+            if (medias[i] >= 60) {
+                System.out.println(nomes[i]);
+            }
+        }
+
+        double porcentagemAprovacao = (double) aprovados / N * 100;
+        System.out.printf("Porcentagem de aprovação: %.2f%%\n", porcentagemAprovacao);
+
+        if (aprovados > 0) {
+            System.out.println("Maior média: " + nomes[indiceMaiorMedia] + " (" + maiorMedia + ")");
+            System.out.printf("Média dos aprovados: %.2f\n", somaAprovados / aprovados);
+        } else {
+            System.out.println("Não há candidatos aprovados.");
+        }
+    }
+}
