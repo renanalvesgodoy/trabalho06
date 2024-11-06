@@ -48,7 +48,7 @@ public class Concurso {
 
         System.out.println("\nAprovados:");
         for (int i = 0; i < N; i++) {
-            if (medias[i] >= 60) {
+            if (medias[i] >= 70) {
                 System.out.println(nomes[i]);
             }
         }
